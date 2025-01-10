@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo_App.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#C8C8C8">
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="15">
+
+        <!-- Logo -->
+        <Image
+            Source="logo.png"
+            HeightRequest="80"
+            WidthRequest="80"
+            Aspect="AspectFit"
+            HorizontalOptions="Center" />
+
+        <!-- Überschrift -->
+        <Label
+            Text="SimpleTask"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="24"
+            TextColor="#8C0000"
+            HorizontalOptions="Center" />
+
+        <!-- Aufgabenliste -->
+        <CollectionView 
+            x:Name="taskView"
+            BackgroundColor="#FFFFFF"
+            Margin="0, 10, 0, 10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame 
+                        Padding="10" 
+                        Margin="0, 5"
+                        CornerRadius="10"
+                        BackgroundColor="#C8C8C8"
+                        HasShadow="True">
+                        <Grid ColumnDefinitions="1*, 3*" RowDefinitions="Auto, Auto">
+                            <!-- Titel -->
+                            <Label
+                                x:Name="titleLabel"
+                                Text="{Binding Title}"
+                                FontFamily="Inter"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                TextColor="#8C0000"
+                                VerticalTextAlignment="Center" />
+
+                            <!-- Beschreibung -->
+                            <Label
+                                x:Name="descriptionLabel"
+                                Text="{Binding Description}"
+                                FontFamily="Inter"
+                                FontSize="16"
+                                TextColor="#000000"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0, 5, 0, 0" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

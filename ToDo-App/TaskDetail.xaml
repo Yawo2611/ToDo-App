@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo_App.TaskDetail"
+             Title="TaskDetail">
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="15">
+
+        <!-- Überschrift -->
+        <Label
+            Text="Task Details"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="24"
+            TextColor="#8C0000"
+            HorizontalOptions="Center" />
+
+        <!-- Titel -->
+        <Label
+            Text="Title:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <Label
+            x:Name="taskTitleLabel"
+            FontFamily="Inter"
+            FontSize="18"
+            TextColor="#000000" />
+
+        <!-- Beschreibung -->
+        <Label
+            Text="Description:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <Label
+            x:Name="taskDescriptionLabel"
+            FontFamily="Inter"
+            FontSize="18"
+            TextColor="#000000" />
+
+    </VerticalStackLayout>
+</ContentPage>

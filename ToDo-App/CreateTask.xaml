@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo_App.CreateTask"
+             BackgroundColor="#c8c8c8"
+             Shell.FlyoutItemIsVisible="False"
+             Title="Content page"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="15"
+       >
+
+        <Label 
+            Text="Create a New Task"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="20"
+            TextColor="#213123"
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="Task Title"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="16"
+            TextColor="Black" />
+        <Entry 
+            x:Name="TaskTitleEntry"
+            Placeholder="Enter task title"
+            BackgroundColor="White"
+            TextColor="Black" />
+
+        <Label 
+            Text="Task Description"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="16"
+            TextColor="Black" />
+        <Editor 
+            x:Name="TaskDescriptionEditor"
+            Placeholder="Enter task description"
+            BackgroundColor="White"
+            TextColor="Black"
+            HeightRequest="100" />
+
+        <Button 
+            Text="Save Task"
+            BackgroundColor="#0080ff"
+            TextColor="White"
+            Clicked="OnSaveTask"
+            HorizontalOptions="Center" />
+
+        <Label
+        x:Name="outputLabel"
+        FontFamily="Inter"
+        FontAttributes="Bold"
+        FontSize="16"
+        TextColor="Black" />
+
+
+    </VerticalStackLayout>
+</ContentPage>
