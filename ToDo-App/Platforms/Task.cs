@@ -1,4 +1,4 @@
-namespace ToDo_App.Models;
+﻿namespace ToDo_App.Models;
 using Newtonsoft.Json;
 
 public class Task
@@ -7,8 +7,6 @@ public class Task
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime DueDate { get; set; }
-
-    // Neues Property
     public bool IsCompleted { get; set; } = false;
 
     [JsonConstructor]

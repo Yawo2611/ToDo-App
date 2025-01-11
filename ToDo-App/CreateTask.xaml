@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDo_App.CreateTask"
              BackgroundColor="#c8c8c8"
-             Shell.FlyoutItemIsVisible="False"
-             Title="Content page"
+             Shell.FlyoutItemIsVisible="True"
+             Title="Create a Task"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout
         Padding="20"
@@ -43,6 +43,9 @@
             BackgroundColor="White"
             TextColor="Black"
             HeightRequest="100" />
+
+        <Label Text="Due Date" FontSize="16" FontAttributes="Bold" TextColor="Black" />
+        <DatePicker x:Name="TaskDueDatePicker" />
 
         <Button 
             Text="Save Task"

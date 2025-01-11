@@ -1,6 +1,7 @@
 ﻿namespace ToDo_App;
 using ToDo_App.Models;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 public partial class MainPage : ContentPage
 {
@@ -16,27 +17,28 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-
         nextRecID = Preferences.Default.Get("nextRecordID", 0);
         fullPath = Path.Combine(dataPath, fileName);
-        
+        BindingContext = this;
+
         if (File.Exists(fullPath))
         {
-            
+            RetrieveJSON(fullPath);
         }
-        
+
     }
 
     private async void OnTaskSelected(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is Task selectedTask)
         {
-            // Navigiere zur TaskDetailPage und übergebe die ausgewählte Task
-            await Navigation.PushAsync(new TaskDetailPage(selectedTask));
+            await Navigation.PushAsync(new TaskDetail(selectedTask));
         }
 
-    ((CollectionView)sender).SelectedItem = null;
+
+        ((CollectionView)sender).SelectedItem = null;
     }
+
 
     private async void RetrieveJSON(string myPath)
     {
@@ -47,18 +49,17 @@ public partial class MainPage : ContentPage
             {
                 tasks.Clear();
                 tasks = JsonConvert.DeserializeObject<List<Task>>(data);
-                await DisplayAlert("Deserialization complete", "Length: " + tasks.Count.ToString() + " records read.", "OK");
-            }
-            else
-            {
-                await DisplayAlert("No data", "NO data currently exists...add some records!", "OK");
+                ShowAllTasks(null, null);
             }
         }
         catch (Exception exc)
         {
+            Debug.WriteLine($"Error: {exc.Message}");
             await DisplayAlert("Something went wrong", exc.Message, "OK");
         }
     }
+
+
 
     public static int FindIndex(int searchId)
     {
@@ -70,6 +71,26 @@ public partial class MainPage : ContentPage
         return -1;
 
     }
+
+    private void OnTaskCompletedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        var task = (Task)checkBox.BindingContext;
+
+        if (task != null)
+        {
+            task.IsCompleted = e.Value;
+
+            // Aktualisiere das JSON
+            MainPage.jsonData = JsonConvert.SerializeObject(MainPage.tasks);
+            System.IO.File.WriteAllText(MainPage.fullPath, MainPage.jsonData);
+            Debug.WriteLine($"Task '{task.Title}' marked as {(task.IsCompleted ? "completed" : "not completed")}");
+
+        }
+    }
+
+
+
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
@@ -87,6 +108,8 @@ public partial class MainPage : ContentPage
 
         // CollectionView aktualisieren
         taskView.ItemsSource = allTasks;
+        Debug.WriteLine($"Tasks count: {MainPage.tasks.Count}");
+
     }
 
 

@@ -42,5 +42,14 @@
             FontSize="18"
             TextColor="#000000" />
 
+        <Button x:Name="deleteButton"
+                Text="Delete"
+                BackgroundColor="#8C0000"
+                TextColor="#000000"
+                Clicked="DeleteTask"/>
+
+
+
+
     </VerticalStackLayout>
 </ContentPage>

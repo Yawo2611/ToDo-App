@@ -7,9 +7,9 @@
             InitializeComponent();
         }
 
-        protected override Window CreateWindow(IActivationState activationState)
+        protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new NavigationPage(new MainPage()));
+            return new Window(new AppShell());
         }
     }
 }
