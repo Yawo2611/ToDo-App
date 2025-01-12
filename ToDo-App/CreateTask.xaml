@@ -1,66 +1,84 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDo_App.CreateTask"
-             BackgroundColor="#c8c8c8"
-             Shell.FlyoutItemIsVisible="True"
-             Title="Create a Task"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Title="Create Task">
+
     <VerticalStackLayout
         Padding="20"
         Spacing="15"
-       >
+        BackgroundColor="#C8C8C8">
+        <!-- Sekundärfarbe -->
 
-        <Label 
-            Text="Create a New Task"
-            FontFamily="Inter"
-            FontAttributes="Bold"
-            FontSize="20"
-            TextColor="#213123"
+
+        <Image
+            Source="logo.png"
+            HeightRequest="80"
+            WidthRequest="80"
+            Aspect="AspectFit"
             HorizontalOptions="Center" />
-
-        <Label 
-            Text="Task Title"
-            FontFamily="Inter"
-            FontAttributes="Bold"
-            FontSize="16"
-            TextColor="Black" />
-        <Entry 
-            x:Name="TaskTitleEntry"
-            Placeholder="Enter task title"
-            BackgroundColor="White"
-            TextColor="Black" />
-
-        <Label 
-            Text="Task Description"
-            FontFamily="Inter"
-            FontAttributes="Bold"
-            FontSize="16"
-            TextColor="Black" />
-        <Editor 
-            x:Name="TaskDescriptionEditor"
-            Placeholder="Enter task description"
-            BackgroundColor="White"
-            TextColor="Black"
-            HeightRequest="100" />
-
-        <Label Text="Due Date" FontSize="16" FontAttributes="Bold" TextColor="Black" />
-        <DatePicker x:Name="TaskDueDatePicker" />
-
-        <Button 
-            Text="Save Task"
-            BackgroundColor="#0080ff"
-            TextColor="White"
-            Clicked="OnSaveTask"
-            HorizontalOptions="Center" />
-
         <Label
-        x:Name="outputLabel"
-        FontFamily="Inter"
-        FontAttributes="Bold"
-        FontSize="16"
-        TextColor="Black" />
+            Text="Create Task"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="24"
+            TextColor="#8C0000"
+            HorizontalOptions="Center" />
+        
+        <!-- Titel -->
+        <Label Text="Task Title" 
+               FontAttributes="Bold" 
+               FontSize="20" 
+               TextColor="#000000"/>
+        <!-- Schriftfarbe -->
+        <Entry x:Name="TaskTitleEntry" 
+               Placeholder="Enter task title" 
+               BackgroundColor="#ffffff" 
+               TextColor="#000000" />
+        <!-- Beschreibung -->
+        <Label Text="Task Description" 
+               FontAttributes="Bold"
+               FontSize="20" 
+               TextColor="#000000" />
+        <!-- Schriftfarbe -->
+        <Editor x:Name="TaskDescriptionEditor" 
+                Placeholder="Enter task description" 
+                HeightRequest="100" 
+                BackgroundColor="#ffffff" 
+                TextColor="#000000" />
 
+        <!-- Fälligkeitsdatum -->
+        <Label Text="Due Date" 
+               FontAttributes="Bold" 
+               FontSize="20" 
+               TextColor="#000000" />
+        <!-- Schriftfarbe -->
+            <DatePicker x:Name="DueDatePicker" 
+                        Background="#ffffff"
+                        TextColor="#000000"/>
+        <!-- Priorität -->
+        <Label Text="Priority" 
+               FontAttributes="Bold" 
+               FontSize="20" 
+               TextColor="#000000" />
+        <!-- Schriftfarbe -->
+            <Picker x:Name="PriorityPicker" 
+                BackgroundColor="#ffffff" 
+                TextColor="#000000">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>High</x:String>
+                    <x:String>Medium</x:String>
+                    <x:String>Low</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
 
+        <!-- Speichern -->
+        <Button Text="Save Task" 
+                Clicked="OnSaveTask" 
+                BackgroundColor="#8C0000"
+                TextColor="White" 
+                FontAttributes="Bold" />
     </VerticalStackLayout>
 </ContentPage>

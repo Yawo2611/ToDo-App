@@ -80,6 +80,9 @@
 	  <MauiXaml Update="CreateTask.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="EditTaskPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="TaskDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

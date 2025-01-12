@@ -7,8 +7,10 @@ using ToDo_App.Models;
 public partial class TaskDetail : ContentPage
 {
     private int id;
+    private Task _task;
     public TaskDetail(Task task)
     {
+        _task = task;
         InitializeComponent();
 
         id = task.Id;
@@ -29,5 +31,10 @@ public partial class TaskDetail : ContentPage
 
             Navigation.PopAsync();
         }
+    }
+
+    private async void OnEditTask(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new EditTaskPage(_task));
     }
 }

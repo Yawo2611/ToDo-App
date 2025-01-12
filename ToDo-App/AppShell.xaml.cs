@@ -9,6 +9,7 @@
             Routing.RegisterRoute("MainPage", typeof(MainPage));
             Routing.RegisterRoute("CreateTask", typeof(CreateTask));
             Routing.RegisterRoute("TaskDetail", typeof(TaskDetail));
+            Routing.RegisterRoute("EditTaskPage", typeof(EditTaskPage));
 
         }
     }

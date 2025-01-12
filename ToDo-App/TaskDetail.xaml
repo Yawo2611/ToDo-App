@@ -2,14 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDo_App.TaskDetail"
+            Shell.NavBarIsVisible="False"
              Title="TaskDetail">
+    
     <VerticalStackLayout
         Padding="20"
-        Spacing="15">
+        Spacing="35"
+        Background="#C8C8C8">
 
-        <!-- Überschrift -->
+        <!-- Logo -->
+        <Image
+            Source="logo.png"
+            HeightRequest="80"
+            WidthRequest="80"
+            Aspect="AspectFit"
+            HorizontalOptions="Center" />
         <Label
-            Text="Task Details"
+            Text="Task Detail"
             FontFamily="Inter"
             FontAttributes="Bold"
             FontSize="24"
@@ -21,35 +30,43 @@
             Text="Title:"
             FontFamily="Inter"
             FontAttributes="Bold"
-            FontSize="18"
-            TextColor="#000000" />
+            FontSize="24"
+            TextColor="#000000" 
+            HorizontalOptions="Center"/>
         <Label
             x:Name="taskTitleLabel"
             FontFamily="Inter"
-            FontSize="18"
-            TextColor="#000000" />
-
+            FontSize="24"
+            TextColor="#000000"
+            HorizontalOptions="Center"/>
+    
         <!-- Beschreibung -->
         <Label
             Text="Description:"
             FontFamily="Inter"
             FontAttributes="Bold"
-            FontSize="18"
-            TextColor="#000000" />
+            FontSize="24"
+            TextColor="#000000"
+            HorizontalOptions="Center"/>
         <Label
             x:Name="taskDescriptionLabel"
             FontFamily="Inter"
-            FontSize="18"
-            TextColor="#000000" />
+            FontSize="24"
+            TextColor="#000000" 
+            HorizontalOptions="Center"/>
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button 
+            x:Name="deleteButton"
+            Text="Delete"
+            BackgroundColor="#8C0000"
+            TextColor="#ffffff"
+            Clicked="DeleteTask"/>
 
-        <Button x:Name="deleteButton"
-                Text="Delete"
-                BackgroundColor="#8C0000"
-                TextColor="#000000"
-                Clicked="DeleteTask"/>
-
-
-
-
+            <Button 
+            Text="Edit Task" 
+            BackgroundColor="#0078D4" 
+            TextColor="White"
+            Clicked="OnEditTask" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

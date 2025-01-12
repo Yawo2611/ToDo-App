@@ -1,0 +1,107 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo_App.EditTaskPage"
+             Shell.NavBarIsVisible="False"
+             Title="Edit Task">
+
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="15"
+        Background="#C8C8C8">
+
+        <!-- Logo -->
+        <Image
+            Source="logo.png"
+            HeightRequest="80"
+            WidthRequest="80"
+            Aspect="AspectFit"
+            HorizontalOptions="Center" />
+
+        <!-- Überschrift -->
+        <Label
+            Text="Edit Task"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="24"
+            TextColor="#8C0000"
+            HorizontalOptions="Center" />
+
+        <!-- Titel -->
+        <Label
+            Text="Title:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <Entry
+            x:Name="titleEntry"
+            Placeholder="Enter Title"
+            BackgroundColor="#FFFFFF"
+            TextColor="#000000" />
+
+        <!-- Beschreibung -->
+        <Label
+            Text="Description:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <Editor
+            x:Name="descriptionEditor"
+            Placeholder="Enter Description"
+            HeightRequest="100"
+            BackgroundColor="#FFFFFF"
+            TextColor="#000000" />
+
+        <!-- Fälligkeitsdatum -->
+        <Label
+            Text="Due Date:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <DatePicker
+            x:Name="dueDatePicker"
+            BackgroundColor="#FFFFFF"
+            TextColor="#000000" />
+
+        <!-- Priorität -->
+        <Label
+            Text="Priority:"
+            FontFamily="Inter"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="#000000" />
+        <Picker
+            x:Name="priorityPicker"
+            BackgroundColor="#FFFFFF"
+            TextColor="#000000">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>High</x:String>
+                    <x:String>Medium</x:String>
+                    <x:String>Low</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <!-- Buttons -->
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button
+                Text="Save"
+                BackgroundColor="#0078D4"
+                TextColor="White"
+                FontAttributes="Bold"
+                WidthRequest="120"
+                Clicked="OnSaveTask" />
+            <Button
+                Text="Cancel"
+                BackgroundColor="#8C0000"
+                TextColor="White"
+                FontAttributes="Bold"
+                WidthRequest="120"
+                Clicked="OnCancel" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

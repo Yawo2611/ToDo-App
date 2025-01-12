@@ -3,83 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDo_App.MainPage"
              Shell.NavBarIsVisible="False"
-             Background="#f5f5f5"
+             Background="#C8C8C8"
              Title="Home">
-    <VerticalStackLayout
-        Padding="20"
-        Spacing="15">
 
-        <!-- Logo -->
-        <Image
-            Source="logo.png"
-            HeightRequest="80"
-            WidthRequest="80"
-            Aspect="AspectFit"
-            HorizontalOptions="Center" />
+    <!-- ScrollView um die Seite scrollbar zu machen -->
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="15">
 
-        <!-- Überschrift -->
-        <Label
-            Text="SimpleTask"
-            FontFamily="Inter"
-            FontAttributes="Bold"
-            FontSize="28"
-            TextColor="#0078D4"
-            HorizontalOptions="Center"
-            Margin="0, 10, 0, 20" />
+            <!-- Logo -->
+            <Image
+                Source="logo.png"
+                HeightRequest="80"
+                WidthRequest="80"
+                Aspect="AspectFit"
+                HorizontalOptions="Center" />
 
-        <!-- Aufgabenliste -->
-        <CollectionView 
-            x:Name="taskView"
-            SelectionMode="Single"
-            BackgroundColor="#FFFFFF"
-            Margin="0, 10, 0, 10"
-            SelectionChanged="OnTaskSelected">
+            <!-- Überschrift -->
+            <Label
+                Text="SimpleTask"
+                FontFamily="Inter"
+                FontAttributes="Bold"
+                FontSize="28"
+                TextColor="#8C0000"
+                HorizontalOptions="Center"
+                Margin="0, 10, 0, 20" />
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame 
-                        Padding="15" 
-                        Margin="0, 10"
-                        CornerRadius="15"
-                        BackgroundColor="#ffffff"
-                        BorderColor="#e0e0e0"
-                        HasShadow="True">
-                        <VerticalStackLayout Spacing="5">
+            <!-- Aufgabenliste -->
+            <CollectionView 
+                x:Name="taskView"
+                SelectionMode="Single"
+                Margin="0, 10, 0, 10"
+                SelectionChanged="OnTaskSelected"
+                HorizontalOptions="Center">
 
-                            <CheckBox 
-                            IsChecked="{Binding IsCompleted, Mode=TwoWay}" 
-                            VerticalOptions="Center"
-                            CheckedChanged="OnTaskCompletedChanged"/>   
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame 
+                            Padding="10" 
+                            Margin="0, 20"
+                            WidthRequest="250"
+                            HorizontalOptions="Center"
+                            CornerRadius="15"
+                            BackgroundColor="#ffffff"
+                            BorderColor="#e0e0e0"
+                            HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
 
-                            <!-- Titel -->
-                            <Label
-                                Text="{Binding Title}"
-                                FontFamily="Inter"
-                                FontAttributes="Bold"
-                                FontSize="20"
-                                TextColor="#0078D4" 
-                                TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                                <!-- Checkbox Row -->
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <CheckBox 
+                                        IsChecked="{Binding IsCompleted, Mode=TwoWay}" 
+                                        VerticalOptions="Center"
+                                        CheckedChanged="OnTaskCompletedChanged"/>
+                                    <Label
+                                        Text="Mark as Complete"
+                                        FontSize="14"
+                                        FontAttributes="Italic"
+                                        TextColor="#0078D4"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
 
-                            <!-- Beschreibung -->
-                            <Label
-                                Text="{Binding Description}"
-                                FontFamily="Inter"
-                                FontSize="16"
-                                TextColor="#333333" 
-                                TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                                <!-- Titel -->
+                                <Label
+                                    Text="{Binding Title}"
+                                    FontFamily="Inter"
+                                    FontAttributes="Bold"
+                                    FontSize="20">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsCompleted}" Value="true">
+                                            <Setter Property="TextDecorations" Value="Strikethrough" />
+                                            <Setter Property="TextColor" Value="#A0A0A0" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsCompleted}" Value="false">
+                                            <Setter Property="TextColor" Value="#8C0000" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
 
-                            <!-- Fälligkeitsdatum -->
-                            <Label 
-                                Text="{Binding DueDate, StringFormat='Due: {0:yyyy-MM-dd}'}" 
-                                FontSize="14" 
-                                TextColor="#FF6F61"
-                                Margin="0, 5, 0, 0" 
-                                TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                                <!-- Beschreibung -->
+                                <Label
+                                    Text="{Binding Description}"
+                                    FontFamily="Inter"
+                                    FontSize="16"
+                                    TextColor="#333333" />
 
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                                <!-- Priorität -->
+                                <Label 
+                                    Text="{Binding PriorityText}" 
+                                    FontSize="14" 
+                                    TextColor="#0078D4"
+                                    FontAttributes="Bold"
+                                    Margin="0, 5, 0, 0" />
+
+                                <!-- Fälligkeitsdatum -->
+                                <Label 
+                                    Text="{Binding DueDate, StringFormat='Due: {0:yyyy-MM-dd}'}" 
+                                    FontSize="14" 
+                                    TextColor="#000000"
+                                    Margin="0, 5, 0, 0" />
+
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

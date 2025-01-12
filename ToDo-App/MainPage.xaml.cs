@@ -2,6 +2,7 @@
 using ToDo_App.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.UI.Dispatching;
 
 public partial class MainPage : ContentPage
 {
@@ -12,6 +13,8 @@ public partial class MainPage : ContentPage
     public static string fileName = "tasks.json";
     public static string fullPath;
     public static string jsonData;
+    private bool _isInitialized = false;
+
 
 
     public MainPage()
@@ -74,22 +77,32 @@ public partial class MainPage : ContentPage
 
     private void OnTaskCompletedChanged(object sender, CheckedChangedEventArgs e)
     {
+        if (!_isInitialized)
+            return;
+
         var checkBox = (CheckBox)sender;
         var task = (Task)checkBox.BindingContext;
 
         if (task != null)
         {
             task.IsCompleted = e.Value;
-
-            // Aktualisiere das JSON
             MainPage.jsonData = JsonConvert.SerializeObject(MainPage.tasks);
             System.IO.File.WriteAllText(MainPage.fullPath, MainPage.jsonData);
+
             Debug.WriteLine($"Task '{task.Title}' marked as {(task.IsCompleted ? "completed" : "not completed")}");
 
         }
     }
 
 
+
+
+    // Setze _isInitialized auf true nach dem Laden der Seite
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _isInitialized = true;
+    }
 
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
@@ -101,16 +114,14 @@ public partial class MainPage : ContentPage
 
     private void ShowAllTasks(object sender, EventArgs e)
     {
-        // Zeige alle Aufgaben an, sortiert nach Titel
         var allTasks = from task in MainPage.tasks
-                       orderby task.Title
+                       orderby task.Priority, task.Title
                        select task;
 
-        // CollectionView aktualisieren
         taskView.ItemsSource = allTasks;
         Debug.WriteLine($"Tasks count: {MainPage.tasks.Count}");
-
     }
+
 
 
 }

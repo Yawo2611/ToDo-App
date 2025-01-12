@@ -1,6 +1,7 @@
 namespace ToDo_App;
-using ToDo_App.Models;
+
 using Newtonsoft.Json;
+using ToDo_App.Models;
 
 public partial class CreateTask : ContentPage
 {
@@ -9,38 +10,31 @@ public partial class CreateTask : ContentPage
         InitializeComponent();
     }
 
-    public void OnSaveTask(object sender, EventArgs e)
+    private async void OnSaveTask(object sender, EventArgs e)
     {
         string title = TaskTitleEntry.Text;
         string description = TaskDescriptionEditor.Text;
-        DateTime dueDate = TaskDueDatePicker.Date; // Datum vom DatePicker
+        DateTime dueDate = DueDatePicker.Date;
 
-        if (!string.IsNullOrWhiteSpace(title) && !string.IsNullOrWhiteSpace(description))
+        // Konvertiere die Auswahl des Dropdowns in eine numerische Priorität
+        int priority = PriorityPicker.SelectedIndex + 1;
+
+        if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(description) && priority > 0)
         {
-            // Füge die neue Aufgabe hinzu
-            MainPage.tasks.Add(new Task(title, description, dueDate));
-            int i = MainPage.tasks.Count;
+            // Neue Aufgabe hinzufügen
+            var newTask = new Task(title, description, dueDate, priority);
+            MainPage.tasks.Add(newTask);
 
-            // Felder zurücksetzen
-            TaskTitleEntry.Text = "";
-            TaskDescriptionEditor.Text = "";
-
-            // Aufgaben in JSON speichern
+            // JSON-Daten aktualisieren
             MainPage.jsonData = JsonConvert.SerializeObject(MainPage.tasks);
             System.IO.File.WriteAllText(MainPage.fullPath, MainPage.jsonData);
 
-            // Nächste ID erhöhen und speichern
-            MainPage.nextRecID++;
-            Preferences.Default.Set("nextRecordID", MainPage.nextRecID);
-
-            // Erfolgsnachricht anzeigen
-            outputLabel.Text = $"Task '{title}' wurde erfolgreich hinzugefügt.";
+            await DisplayAlert("Task Added", "Your task has been saved.", "OK");
+            await Navigation.PopAsync();
         }
         else
         {
-            // Fehlermeldung anzeigen
-            outputLabel.Text = "Überprüfe deine Daten, etwas ist falsch.";
+            await DisplayAlert("Error", "Please fill out all fields and select a priority.", "OK");
         }
     }
-
 }
